@@ -28,7 +28,7 @@ public class Clobber {
   public static final String DEFAULT_LOGGER_CONFIG = "log4j.rootLogger=DEBUG, ConsoleAppender\n" + "log4j.appender.ConsoleAppender=org.apache.log4j.ConsoleAppender\n"
                                                        + "log4j.appender.ConsoleAppender.layout=org.apache.log4j.PatternLayout\n"
                                                        + "log4j.appender.ConsoleAppender.layout.ConversionPattern=%p %C %M %m%n\n";
-  // TODO make this work better
+  // TODO make this work better 
   public static JFrame       clobberFrame;
 
   /**
