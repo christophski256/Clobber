@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by DTI (Unitas) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="CLOBBER_PROJECT">
+    <xs:annotation>
+      <xs:documentation>Comment describing your root element</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="CLOBBER_TYPES">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AUTO_ORACLE_CLOBBERS" minOccurs="0">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="CONFIGURATION_LIST">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="CONFIGURATION">
+                            <xs:complexType>
+                              <xs:all>
+                                <xs:element name="ID"/>
+                                <xs:element name="CONFIG_DATABASE_CONNECTION_STRING"/>
+                                <xs:element name="CONFIG_USERNAME"/>
+                                <xs:element name="CONFIG_PASSWORD"/>
+                                <xs:element name="CONFIG_TABLE"/>
+                              </xs:all>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="RESOURCE_LIST">
+                      <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                          <xs:element name="RESOURCE">
+                            <xs:complexType>
+                              <xs:all>
+                                <xs:element name="CONFIGURATION_ID"/>
+                                <xs:element name="FILE_SYSTEM_LOCATION" type="file-location-type"/>
+                                <xs:element name="TABLE_TYPE_INSTANCE_MNEM"/>
+                                <xs:element name="IS_ACTIVE" type="xs:boolean"/>
+                                <xs:element name="LAST_CLOBBED" type="xs:date"/>
+                              </xs:all>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CLOB_RULE_LIST">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CLOB_RULE" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="RULE_NAME">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="VALUE">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:enumeration value="YES"/>
+                          <xs:enumeration value="NO"/>
+                          <xs:enumeration value="PROMPT"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="file-location-type">
+    <xs:all>
+      <xs:element name="PATH"/>
+      <xs:element name="DIRECTORY" minOccurs="0">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="IS_RECURSIVE" type="xs:boolean"/>
+          </xs:all>
+        </xs:complexType>
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+</xs:schema>

@@ -371,7 +371,7 @@ public class FileDrop {
     if (supportsDnD == null) {
       boolean support = false;
       try {
-        Class arbitraryDndClass = Class.forName("java.awt.dnd.DnDConstants");
+        Class.forName("java.awt.dnd.DnDConstants");
         support = true;
       } // end try
       catch (Exception e) {
@@ -388,7 +388,7 @@ public class FileDrop {
 
   private static File[] createFileArray(BufferedReader bReader, PrintStream out) {
     try {
-      java.util.List list = new java.util.ArrayList();
+      java.util.List<java.io.File> list = new java.util.ArrayList<java.io.File>();
       java.lang.String line = null;
       while ((line = bReader.readLine()) != null) {
         try {

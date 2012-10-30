@@ -21,7 +21,7 @@ public class AddResourceDialog extends JDialog {
   private AddResourceDialog(JFrame clobberFrame, List<AddResourcePanel> panels, String resourceName) {
     super(clobberFrame,true);
     setTitle("Add Resource");
-    setBounds(100, 100, 450, 300);
+    setBounds(100, 100, 450, 185);
     getContentPane().setLayout(new BorderLayout());
     {
       connectionTypeTabPane = new JTabbedPane(JTabbedPane.TOP);
@@ -31,14 +31,13 @@ public class AddResourceDialog extends JDialog {
           
           connectionTypeTabPane.addTab(p.getTitle(), null, p , null);
         }
-        
-        
       }
     }
   }
   
   public static AddResourceDialog getDefaultAddResourceDialog(String resourceName){
     List<AddResourcePanel> connectionTypePanels= ClobberConnection.getAllAddResourcePanels();  
+    
     return new AddResourceDialog(Clobber.clobberFrame, connectionTypePanels, resourceName);
   }
 

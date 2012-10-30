@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by DTI (Unitas) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="CLOBBER_CONFIG">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="OPEN_PROJECT_LIST">
+          <xs:complexType>
+            <xs:sequence minOccurs="0">
+              <xs:element name="OPEN_PROJECT">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="PROJECT_FILE_LOCATION"/>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

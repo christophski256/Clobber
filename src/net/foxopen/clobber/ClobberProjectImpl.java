@@ -311,6 +311,7 @@ public class ClobberProjectImpl implements Runnable, ChangeListener, ClobberProj
       this.logger.debug("Starting add resource process for " + files[i].getAbsolutePath());
       AddResourceDialog ard = AddResourceDialog.getDefaultAddResourceDialog(files[i].getName());
       ard.setVisible(true);
+      this.clobberResources.get(0).getConnection();
 
     }
 

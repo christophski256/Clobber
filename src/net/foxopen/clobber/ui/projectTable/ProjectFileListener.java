@@ -27,8 +27,5 @@ public class ProjectFileListener implements FileDrop.Listener{
     }
     l.info(loggingMessage);
     this.clobberProject.addResources(files);
-    
-    
-    
   }
 }

@@ -17,9 +17,6 @@ public class ProjectPanel extends JPanel {
 
     private JScrollPane scrollPane;
     private ResourceTable projectTable;
-    
-    
-    
 
     public ProjectPanel(ClobberProject cp) {
         this.setLayout(new BorderLayout());

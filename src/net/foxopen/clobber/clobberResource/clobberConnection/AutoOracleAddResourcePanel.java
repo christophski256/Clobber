@@ -1,14 +1,22 @@
 package net.foxopen.clobber.clobberResource.clobberConnection;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Window;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+
+import net.foxopen.clobber.ui.CloseActionListener;
+
 
 public class AutoOracleAddResourcePanel extends  AddResourcePanel {
 
@@ -58,6 +66,8 @@ public class AutoOracleAddResourcePanel extends  AddResourcePanel {
     gbc_lblTableTypeInstance.gridy = 1;
     add(lblTableTypeInstance, gbc_lblTableTypeInstance);
     
+    
+    
     JComboBox tableTypeInstanceComboBox = new JComboBox();
     GridBagConstraints gbc_tableTypeInstanceComboBox = new GridBagConstraints();
     gbc_tableTypeInstanceComboBox.anchor = GridBagConstraints.WEST;
@@ -84,9 +94,11 @@ public class AutoOracleAddResourcePanel extends  AddResourcePanel {
     gbc_cancelButton.gridx = 2;
     gbc_cancelButton.gridy = 2;
     add(cancelButton, gbc_cancelButton);
-
+    
+    cancelButton.addActionListener(new CloseActionListener(this));
+ 
   }
-
+  
   @Override
   public String getTitle() {
     return "Oracle Connection" ;

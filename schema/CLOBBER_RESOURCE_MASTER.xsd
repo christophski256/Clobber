@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by DTI (Unitas) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="CLOBBER_RESOURCE_MASTER">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="TABLE_TYPE_LIST">
+          <xs:annotation>
+            <xs:documentation>Defines the types of tables to write to and some plsql to return a lob locator to work with</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence maxOccurs="unbounded">
+              <xs:element name="TABLE_TYPE">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MNEM">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="PLSQL_TO_UPDATE_LOB">
+                      <xs:annotation>
+                        <xs:documentation>Statement to update the clobber Resource.</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="LOB_TYPE">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:enumeration value="CLOB"/>
+                          <xs:enumeration value="LOB"/>
+                          <xs:enumeration value="XMLTYPE"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DATABASE_LIST">
+          <xs:complexType>
+            <xs:sequence maxOccurs="unbounded">
+              <xs:element name="DATABASE">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="MNEM">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DESCRIPTION">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="CONNECTION_STRING">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="USERNAME">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="PASSWORD" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:all>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TABLE_TYPE_INSTANCE_LIST">
+          <xs:complexType>
+            <xs:sequence maxOccurs="unbounded">
+              <xs:element name="TABLE_TYPE_INSTANCE">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="MNEM">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DATABASE_MNEM">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TABLE_TYPE_MNEM">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TABLE_NAME">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="PRIMARY_KEY_COLUMN" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:all>
+                </xs:complexType>
+                <xs:keyref name="tableTypeFK" refer="globalUniqueTableTypeMnem">
+                  <xs:selector xpath="."/>
+                  <xs:field xpath="TABLE_TYPE_MNEM"/>
+                </xs:keyref>
+                <xs:keyref name="databaseInstanceFK" refer="globalUniqueDatabaseMnem">
+                  <xs:selector xpath="."/>
+                  <xs:field xpath="DATABASE_MNEM"/>
+                </xs:keyref>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+    <xs:unique name="globalUniqueTableTypeMnem">
+      <xs:selector xpath="TABLE_TYPE_LIST/TABLE_TYPE"/>
+      <xs:field xpath="MNEM"/>
+    </xs:unique>
+    <xs:unique name="globalUniqueDatabaseMnem">
+      <xs:selector xpath="DATABASE_LIST/DATABASE"/>
+      <xs:field xpath="MNEM"/>
+    </xs:unique>
+    <xs:unique name="globalUniqueTableTypeInstanceMnem">
+      <xs:selector xpath="TABLE_TYPE_INSTANCE_LIST/TABLE_TYPE_INSTANCE"/>
+      <xs:field xpath="MNEM"/>
+    </xs:unique>
+  </xs:element>
+</xs:schema>

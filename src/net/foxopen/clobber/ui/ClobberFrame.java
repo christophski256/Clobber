@@ -46,6 +46,7 @@ public class ClobberFrame extends JFrame {
    *          The clobber model
    */
   public ClobberFrame(ClobberModel cm) {
+    
     this.logger = Logger.getLogger(this.getClass());
     this.setTitle("Clobber");
     this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

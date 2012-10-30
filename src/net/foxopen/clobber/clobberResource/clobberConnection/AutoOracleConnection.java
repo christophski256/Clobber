@@ -117,6 +117,8 @@ public class AutoOracleConnection extends ClobberConnection {
     // TODO may be worth abstracting out the oracle connection stuff
     Logger l = Logger.getLogger(AutoOracleConnection.class);
     l.debug("Using an autotomatic Oracle connection to clob " + fileName);
+    EasyOracleConnection econn = null;
+    EasyOracleConnection eresourceConnection = null;
     Connection conn = null;
     Connection resourceConnection = null;
     String resourceTableName;
@@ -135,18 +137,26 @@ public class AutoOracleConnection extends ClobberConnection {
       throw new ClobbingFailedException(e);
     }
     try {
+      
+      //econn = new EasyOracleConnection(this.configConnectionString, this.configUserName, this.configPassword, l); 
       // load config from xmltype column on database
       conn = DriverManager.getConnection(this.configConnectionString, this.configUserName, this.configPassword);
 
       OracleStatement stmt = (OracleStatement) conn.createStatement();
+      
       String statementString = "SELECT (xml_data).getClobVal() " + "FROM " + this.configUserName + "." + this.configTable + " " + "WHERE name = 'CLOBBER_RESOURCE_MASTER'";
 
       l.debug("Executing " + statementString);
       stmt.execute(statementString);
       OracleResultSet ors = (OracleResultSet) stmt.getResultSet();
       ors.next();
+      
+      //econn.execute(statementString);
+      //econn.next();
+      
 
       InputStream clobberResourceMasterStream = ors.getCLOB(1).asciiStreamValue();
+      //InputStream clobberResourceMasterStream = econn.getResult().getCLOB(1).asciiStreamValue();
 
       Node clobberResourceMasterDOM = b.build(clobberResourceMasterStream);
 
@@ -179,7 +189,10 @@ public class AutoOracleConnection extends ClobberConnection {
       e.printStackTrace();
       throw new ClobbingFailedException(e);
     } finally {
+      
+      //econn.dispose();
       try {
+        
         conn.close();
       } catch (SQLException | NullPointerException e) {
         l.warn(e.getStackTrace());
@@ -194,8 +207,8 @@ public class AutoOracleConnection extends ClobberConnection {
     // connect to database described in xml
     l.debug("Connecting to " + resourceConnectionString + " user: " + resourceUser + " password: " + resourcePassword);
     try {
+      
       resourceConnection = DriverManager.getConnection(resourceConnectionString, resourceUser, resourcePassword);
-
       l.debug("Connected to " + resourceUser);
       l.debug("Statement to execute: \n" + plSQL);
       // set up a temporary LOB

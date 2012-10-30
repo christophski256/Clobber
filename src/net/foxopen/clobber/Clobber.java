@@ -37,7 +37,8 @@ public class Clobber {
    * @param args
    *          The arguments
    */
-
+  
+  
   public static void main(String[] args) {
 
     String loggerPath = System.getProperty("user.home") + "/Clobber/.loggerConfig";
